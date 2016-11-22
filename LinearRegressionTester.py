@@ -14,9 +14,9 @@ LEARNING_RATE = 0.01
 
 # generate sample data-set using the following function.
 training_rec, out = make_regression(n_samples=NUM_OF_SAMPLES,
-                                           n_features=NUM_OF_FEATURES,
-                                           n_informative=1,
-                                           noise=NOISE)
+                                    n_features=NUM_OF_FEATURES,
+                                    n_informative=1,
+                                    noise=NOISE)
 
 
 
@@ -57,7 +57,7 @@ def start_linear_regression(training_records, output):
     weights_table, mse_costs, predicted_outputs = regressor.calculate_weights(training_records, output)
     clf = linear_model.LinearRegression(fit_intercept=False)
     clf.fit(training_records, output)
-    print "Starting gradient descent with "
+    print "Starting gradient descent with {0} iterations and a learning rate of {1}".format(NUM_OF_ITERATIONS, LEARNING_RATE)
     print "Running..."
     final_weights = [weights_table[-1][i] for i in range(0, NUM_OF_FEATURES+1)]
     print "After 8000 iterations of Gradient Descent (our implementation), the final weights are : %s" % final_weights
