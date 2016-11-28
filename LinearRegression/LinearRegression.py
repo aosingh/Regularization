@@ -40,7 +40,7 @@ class LinearRegression:
         mse_cost = np.sum(error ** 2) /(2 * len(actual_output))
         return mse_cost, error
 
-    def calculate_weights(self, training_record, output):
+    def calculate_weights(self, training_records, output):
         """
         This method is responsible for calculating weights or coefficients using the gradient descent approach.
 
@@ -65,15 +65,15 @@ class LinearRegression:
 
         """
         mse_costs = []
-        weights = np.random.rand(training_record.shape[1])
+        weights = np.random.rand(training_records.shape[1])
         weights_table = [weights]
         predicted_outputs = []
         for i in range(self.iterations):
-            predicted_output = np.dot(training_record, weights)
+            predicted_output = np.dot(training_records, weights)
             predicted_outputs.append(predicted_output)
             mse_cost, error = LinearRegression.mse_cost_function(predicted_output, output)
             mse_costs.append(mse_cost)
-            slope = training_record.T.dot(error)/(len(output))
+            slope = training_records.T.dot(error)/(len(output))
             weights -= (self.learning_rate * slope)
             weights_table.append(weights)
         return weights_table, mse_costs, predicted_outputs
