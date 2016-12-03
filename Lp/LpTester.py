@@ -3,12 +3,12 @@ from sklearn.datasets.samples_generator import make_regression
 from Lp import Lp
 
 # Define synthetic data-set constants. Change this to experiment with different data sets
-NUM_OF_SAMPLES = 200
+NUM_OF_SAMPLES = 1000
 NUM_OF_FEATURES = 2
 NOISE = 10
 
 # Define the number of iterations and learning rate for Linear regression.
-NUM_OF_ITERATIONS = 1000
+NUM_OF_ITERATIONS = 2000
 LEARNING_RATE = 0.01
 LP_REGULARIZATION_STRENGTH = 1.0
 
@@ -63,6 +63,8 @@ def start_lp_regression(training_records, output):
 
     final_weights = [weights_table[-1][i] for i in range(0, NUM_OF_FEATURES+1)]
     print "After %s iterations of Gradient Descent (our implementation), the final weights are : %s" % (NUM_OF_ITERATIONS, final_weights)
+    print mse_costs[0], mse_costs[-1]
+    print weights_table[0], weights_table[-1]
 
 start_lp_regression(training_records=training_rec, output=out)
 

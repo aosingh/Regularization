@@ -70,6 +70,6 @@ class Lp:
             mse_costs.append(mse_cost)
             slope = training_records.T.dot(error)/(len(output))
             weights = Lp.soft_thresholding_operator(weights - self.learning_rate*slope,
-                                                                 self.learning_rate*self.regularization_strength)
+                                                                 self.regularization_strength)
             weights_table.append(weights)
         return weights_table, mse_costs, predicted_outputs
