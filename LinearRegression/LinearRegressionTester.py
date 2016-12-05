@@ -54,7 +54,10 @@ def start_linear_regression(training_records, output):
     :return:
     """
     regressor = LinearRegression(iterations=NUM_OF_ITERATIONS, learning_rate=LEARNING_RATE)
+    print np.shape(training_records)
+    print np.shape(output)
     weights_table, mse_costs, predicted_outputs = regressor.calculate_weights(training_records, output)
+
     clf = linear_model.LinearRegression(fit_intercept=False)
     clf.fit(training_records, output)
     print "Starting gradient descent with {0} iterations and a learning rate of {1}".format(NUM_OF_ITERATIONS,

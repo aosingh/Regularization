@@ -37,7 +37,7 @@ class LinearRegression:
         :return: Mean Square Error, Error.
         """
         error = predicted_output - actual_output
-        mse_cost = np.sum(error ** 2) /(2 * len(actual_output))
+        mse_cost = np.sum(error ** 2) /(2 * len(actual_output),)
         return mse_cost, error
 
     def calculate_weights(self, training_records, output):

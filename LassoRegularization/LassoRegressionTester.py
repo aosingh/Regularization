@@ -25,6 +25,7 @@ training_rec, out = make_regression(n_samples=NUM_OF_SAMPLES,
 training_rec = np.c_[np.ones(training_rec.shape[0]), training_rec]
 
 
+
 def start_lasso_regression(training_records, output):
     """
     In this method, we compare the weights calculated using our gradient descent approach with the sklearn's output.
