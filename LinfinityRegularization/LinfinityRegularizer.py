@@ -20,12 +20,12 @@ class LinfinityRegression:
         :param l:
         :return:
         """
+        maxw = max(x)
         for i in range(0, len(x)):
-            if x[i] > l:
-                x[i] -= l
-            elif x[i] < -l:
-                x[i] += l
-            else: x[i] = 0
+            if np.abs(x[i]) > np.abs(maxw):
+                x[i] = l*np.sign(x[i])
+            elif np.abs(x[i]) < np.abs(maxw) :
+                x[i]  = l*np.sign(maxw)
         return x
 
 
@@ -47,7 +47,7 @@ class LinfinityRegression:
 
     def calculate_weights(self, training_records, output):
         mse_costs = []
-        weights = np.zeros(training_records.shape[1])
+        weights = np.random.rand(training_records.shape[1])
         weights_table = [weights]
         predicted_outputs = []
         for i in range(self.iterations):
@@ -57,6 +57,6 @@ class LinfinityRegression:
             mse_costs.append(mse_cost)
             slope = training_records.T.dot(error)/(len(output))
             weights = LinfinityRegression.soft_thresholding_operator(weights - self.learning_rate*slope,
-                                                                 self.learning_rate*self.regularization_strength)
+                                                                 self.regularization_strength)
             weights_table.append(weights.copy())
         return weights_table, mse_costs, predicted_outputs

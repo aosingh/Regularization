@@ -1,10 +1,10 @@
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.datasets.samples_generator import make_regression
-from RidgeRegularization import RidgeRegression
 from LinearRegression import LinearRegression
 from RidgeRegularization import RidgeRegression
 from LassoRegularization import LassoRegression
 from Lp import Lp
+from LinfinityRegularization import LinfinityRegularizer
 import matplotlib.pyplot as plt
 import random
 
@@ -22,16 +22,10 @@ NOISE = 10
 NUM_OF_ITERATIONS = 100
 LEARNING_RATE = 0.00001
 
-LINEAR_NUM_OF_ITERATIONS = 100
-LINEAR_LEARNING_RATE = 0.00001
-
-LASSO_NUM_OF_ITERATIONS = 100
-LASSO_LEARNING_RATE = 0.00001
-
 
 
 def f(x):
-    return x*x
+    return x*np.sin(np.pi*x)
 
 x = np.reshape(np.linspace(0, 20, 1000), (-1, 1))
 x  = x.astype(dtype='float64')
@@ -55,18 +49,21 @@ new_features = np.array(poly.fit_transform(x, y=y))
 
 
 def start_overfit_tester():
-    regressor = LinearRegression.LinearRegression(iterations=NUM_OF_ITERATIONS, learning_rate=LINEAR_LEARNING_RATE)
+    regressor = LinearRegression.LinearRegression(iterations=NUM_OF_ITERATIONS, learning_rate=LEARNING_RATE)
 
     ridge_regression = RidgeRegression.RidgeRegression(iterations=NUM_OF_ITERATIONS, learning_rate=LEARNING_RATE, ridge_learning_rate=1)
 
-    lasso_regression = LassoRegression.LassoRegression(iterations=LASSO_NUM_OF_ITERATIONS, learning_rate=LASSO_LEARNING_RATE, regularization_strength=1)
+    lasso_regression = LassoRegression.LassoRegression(iterations=NUM_OF_ITERATIONS, learning_rate=LEARNING_RATE, regularization_strength=1)
 
-    lp = Lp.Lp(iterations=100, learning_rate=0.00001, regularization_strength=1)
+    lp = Lp.Lp(iterations=NUM_OF_ITERATIONS, learning_rate=LEARNING_RATE, regularization_strength=1)
+    Linf = LinfinityRegularizer.LinfinityRegression(iterations=NUM_OF_ITERATIONS, learning_rate=LEARNING_RATE, regularization_strength=0.2)
 
     lweights_table, lmse_costs, lpredicted_outputs = lasso_regression.calculate_weights(new_features, y)
     rweights_table, rmse_costs, rpredicted_outputs = ridge_regression.calculate_weights(new_features, y)
     weights_table, mse_costs, predicted_outputs = regressor.calculate_weights(new_features, y)
     lpweights_table, lpmse_costs, lppredicted_outputs = lp.calculate_weights(new_features, y)
+    linfweights_table, linfmse_costs, linfpredicted_outputs = Linf.calculate_weights(new_features, y)
+
 
 
 
@@ -77,9 +74,6 @@ def start_overfit_tester():
     #print predicted_outputs[-1]
     #print out
 
-    clf = linear_model.Lasso(fit_intercept=False)
-    clf.fit(new_features, y)
-    sklearn_outputs = clf.predict(new_features)
 
     #print x
     #print y
@@ -90,7 +84,9 @@ def start_overfit_tester():
 
     plt.plot(x, rpredicted_outputs[-1], color='black', linewidth=2 , label='L2 Regularizer. MSE is {0}'.format(rmse_costs[-1]))
     plt.plot(x, lpredicted_outputs[-1], color='pink', linewidth=2, label='L1 Regualrizer. MSE is {0}'.format(lmse_costs[-1]))
-    plt.plot(x, lppredicted_outputs[-1], color='orange', linewidth=2, label='Lp(p =0.5) Regularizer is {0}'.format(lpmse_costs[-1]))
+    plt.plot(x, lppredicted_outputs[-1], color='orange', linewidth=2, label='Lp(p =0.5) Regularizer MSE is {0}'.format(lpmse_costs[-1]))
+    plt.plot(x, linfpredicted_outputs[-1], color='darkturquoise', linewidth=2, label='Linf Regularizer MSE is {0}'.format(linfmse_costs[-1]))
+
     plt.title("Curve Fitting for Learning rate = {0} and iterations = {1}".format(LEARNING_RATE, NUM_OF_ITERATIONS))
     plt.xlabel("X")
     plt.ylabel("x*x")
