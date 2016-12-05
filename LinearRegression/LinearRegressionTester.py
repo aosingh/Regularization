@@ -9,7 +9,7 @@ NUM_OF_FEATURES = 2
 NOISE = 10
 
 # Define the number of iterations and learning rate for Linear regression.
-NUM_OF_ITERATIONS = 8000
+NUM_OF_ITERATIONS =1000
 LEARNING_RATE = 0.01
 
 # generate sample data-set using the following function.
@@ -68,6 +68,7 @@ def start_linear_regression(training_records, output):
                                                                                                         final_weights)
 
     print "Using Sklearn's Linear Regression, the weights are : %s" % clf.coef_
+    return weights_table, mse_costs
 
 
 start_linear_regression(training_records=training_rec, output=out)

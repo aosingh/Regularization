@@ -67,6 +67,7 @@ def start_ridge_regression(training_records, output):
     print "After %s iterations of Gradient Descent (our implementation), the final weights are : %s" % (NUM_OF_ITERATIONS, final_weights)
 
     print "Using Sklearn's Ridge Regression, the weights are : %s" % clf.coef_
+    return weights_table,mse_costs
 
 
 start_ridge_regression(training_records=training_rec, output=out)
