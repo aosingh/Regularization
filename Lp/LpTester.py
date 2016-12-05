@@ -65,6 +65,7 @@ def start_lp_regression(training_records, output):
     print "After %s iterations of Gradient Descent (our implementation), the final weights are : %s" % (NUM_OF_ITERATIONS, final_weights)
     print mse_costs[0], mse_costs[-1]
     print weights_table[0], weights_table[-1]
+    return  weights_table, mse_costs
 
 start_lp_regression(training_records=training_rec, output=out)
 

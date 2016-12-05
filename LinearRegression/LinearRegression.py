@@ -66,6 +66,7 @@ class LinearRegression:
         """
         mse_costs = []
         weights = np.random.rand(training_records.shape[1])
+        print weights
         weights_table = [weights]
         predicted_outputs = []
         for i in range(self.iterations):
