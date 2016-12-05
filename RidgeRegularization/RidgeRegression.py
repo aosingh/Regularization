@@ -38,7 +38,7 @@ class RidgeRegression:
             mse_costs.append(mse_cost)
             slope = training_records.T.dot(error)/(len(output))
             weights -= (self.learning_rate * (slope + (self.ridge_learning_rate/len(output))*weights))
-            weights_table.append(weights)
+            weights_table.append(weights.copy())
         return weights_table, mse_costs, predicted_outputs
 
 

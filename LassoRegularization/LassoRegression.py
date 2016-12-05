@@ -58,5 +58,5 @@ class LassoRegression:
             slope = training_records.T.dot(error)/(len(output))
             weights = LassoRegression.soft_thresholding_operator(weights - self.learning_rate*slope,
                                                                  self.learning_rate*self.regularization_strength)
-            weights_table.append(weights)
+            weights_table.append(weights.copy())
         return weights_table, mse_costs, predicted_outputs

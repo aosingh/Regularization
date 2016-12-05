@@ -75,7 +75,7 @@ class LinearRegression:
             mse_costs.append(mse_cost)
             slope = training_records.T.dot(error)/(len(output))
             weights -= (self.learning_rate * slope)
-            weights_table.append(weights)
+            weights_table.append(weights.copy())
         return weights_table, mse_costs, predicted_outputs
 
 
