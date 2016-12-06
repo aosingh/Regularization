@@ -1,9 +1,6 @@
 import numpy as np
-import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from matplotlib import cm
-import seaborn as sea
 import matplotlib.patches as mpatches
 from sklearn.datasets.samples_generator import make_regression
 from mpl_toolkits.mplot3d import Axes3D
@@ -63,7 +60,11 @@ fig = plt.figure()
 ax = fig.gca(projection='3d')
 x = w1
 y = w2
-z = MSEcost[1:]
+z = np.reshape(MSEcost[1:], (np.shape(x)))
+
+print np.shape(x)
+print np.shape(y)
+print np.shape(z)
 ax.plot(x, y, z, label='MSE Error curve for Linear Regression - In coefficient Space')
 plt.xlabel('Coefficient 1')
 plt.ylabel('Coefficient 2')

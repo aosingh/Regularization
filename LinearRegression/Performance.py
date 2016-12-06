@@ -1,15 +1,8 @@
 import numpy as np
-from sklearn.datasets.samples_generator import make_regression
 from sklearn import linear_model
 from LinearRegression import LinearRegression
-import pandas as pd
-import matplotlib as mpl
 import matplotlib.pyplot as plt
-from matplotlib import cm
-import seaborn as sea
-import matplotlib.patches as mpatches
 from sklearn.datasets.samples_generator import make_regression
-from mpl_toolkits.mplot3d import Axes3D
 
 
 # Define synthetic data-set constants. Change this to experiment with different data sets

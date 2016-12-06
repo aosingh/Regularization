@@ -6,10 +6,6 @@ from LassoRegularization import LassoRegression
 from Lp import Lp
 from LinfinityRegularization import LinfinityRegularizer
 import matplotlib.pyplot as plt
-import random
-
-from sklearn import linear_model
-
 import numpy as np
 
 # Define synthetic data-set constants. Change this to experiment with different data sets
